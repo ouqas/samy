@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin' ] , function() {
     Route::get('/products', 'AdminController@products')->name('products');
     Route::get('/addproduct' ,'AdminController@addProductView')->name('addproduct') ;
     Route::post('/saveproduct', 'AdminController@saveProduct');
+    Route::get('/gettallproducts' , 'AdminController@getAllProducts');
 
 });
 

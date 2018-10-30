@@ -10,6 +10,10 @@ use App\Category ;
 use App\SubCategory ;
 use App\Product ;
 
+use phpDocumentor\Reflection\Project;
+use Validator;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -100,6 +104,10 @@ class AdminController extends Controller
         return datatables()->eloquent(SubCategory::query()->with('Category'))->toJson();
     }
 
+    public function getAllProducts() {
+        return datatables()->eloquent(Product::query()->with('SubCategory'))->toJson();
+    }
+
     public function saveSubCategory ( Request $request ) {
         if ( Category::where('id', '=', $request['category_id'])->exists()  ) {
             if ( $request->has('subcategory_id') && SubCategory::where('id', '=', $request['subcategory_id'])->exists() ) {
@@ -134,25 +142,53 @@ class AdminController extends Controller
     /// products
     public function saveProduct(Request $request) {
 
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'filename' => 'required',
-            'filename.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'fiche_technique' => 'required' ,
+            'fiche_technique.*' => 'mimes:pdf,docx|max:4048',
         ]);
 
+        $extension = $request->file('fiche_technique')->getClientOriginalExtension();
+       if ($extension != "pdf")
+       {
+           $validator->errors()->add('fiche_technique', 'Fiche Technique must be a PDF!');
+           return redirect('admin/addproduct')
+               ->withErrors($validator)
+               ->withInput();
+       }
+
+        $product = new Product() ;
+        $product->name = $request['name'] ;
+        $product->sub_category_id = $request['subcategory_id'] ;
+        $product->description = $request['description'] ?  '' : $request['description'];
+        $product->dimension = $request['dimension'] ?  '' : $request['dimension'];
+        $product->angle = $request['angle'] ?  '' : $request['angle'];
+        $product->puissance = $request['puissance'] ?  '' : $request['puissance'];
+        $product->flux_lumineux = $request['flumineux'] ?  '' : $request['flumineux'];
+        $product->alimentation = $request['alimentation'] ?  '' : $request['alimentation'];
+        $product->tcoulor = $request['tcouleur'] ?  '' : $request['tcouleur'];
+        $product->module = $request['module'] ?  '' : $request['module'];
+        $product->poids = $request['poids'] ?  '' : $request['poids'];
+        $product->lumens = $request['lumens'] ?  '' : $request['lumens'];
+        $product->battery = $request['battery'] ?  '' : $request['battery'];
+        $product->technical_details = Storage::disk('local')->put('fiches', $request->file('fiche_technique')) ;
         if($request->hasfile('filename'))
         {
-            $i= 0 ;
+            $i= 1 ;
             foreach($request->file('filename') as $image)
             {
-                $name=$image->getClientOriginalName();
-                $image->move(public_path().'/images/', $name);
-                $data[] = $name;
+               // $name=$image->getClientOriginalName();
+                $filepath = Storage::disk('local')->put('images', $image);
+                //$image->move(local_path().'/images/', $name);
+                $product["image$i"] = $filepath ;
+                $i++;
             }
-            return var_dump($data);
+            $product->save();
         }
 
 
-        return 'ok';
+       // return 'ok';
+        return \Redirect::route('addproduct')->with('message', 'Product Added!');
 
     }
 }
