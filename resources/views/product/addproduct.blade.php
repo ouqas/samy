@@ -17,12 +17,15 @@
                     </ul>
                 </div>
             @endif
+                @if( ! empty ( $message) )
+                    <p class="bg-success">{{ $message }}</p>
+                @endif
 
             <form method="POST" action="{{ url('admin/saveproduct') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group">
-                    <select class="form-control" name="subcategory_id">
+                    <select class="form-control" name="subcategory_id" required>
                         @foreach($subcategories as $subcategory)
                             <option value="{{$subcategory->id}}">{{$subcategory->title}}</option>
                         @endforeach
@@ -30,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Product Name</label>
-                    <input type="text" class="form-control" name="title" value=""  placeholder="">
+                    <input type="text" class="form-control" name="name" value=""  placeholder="" required>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Description</label>
@@ -77,13 +80,26 @@
                     <input type="text" class="form-control" name="battery" value=""  placeholder="">
                 </div>
 
+                <br>
+
+                <div class="form-group">
+                    <label for="exampleInputFile">Fiche technique</label>
+                    <input type="file" id="exampleInputFile" name="fiche_technique" required>
+                    <br>
+                </div>
+
+                <br>
+
                 <label for="exampleFormControlInput1">Images (Maximum 3 images )</label>
                 <div class="input-group control-group increment" >
-                    <input type="file" name="filename[]" class="form-control">
+                    <input type="file" name="filename[]" class="form-control" required>
                     <div class="input-group-btn">
                         <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
                     </div>
                 </div>
+
+
+
                 <div class="clone hide" style="display:none">
                     <div class="control-group input-group addedclones" style="margin-top:10px">
                         <input type="file" name="filename[]" class="form-control">
@@ -94,6 +110,7 @@
                 </div>
 
 
+                <br>
 
                 <button type="submit" class="btn btn-primary mb-2">Save</button>
             </form>
