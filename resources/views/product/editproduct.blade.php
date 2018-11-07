@@ -1,0 +1,166 @@
+@extends('layout')
+@section('title', 'Add Product')
+@section('content')
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fa fa-table"></i> Edit Product </div>
+        <div class="card-body">
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            @if( ! empty ( $message) )
+                <p class="bg-success">{{ $message }}</p>
+            @endif
+
+            <form method="POST" action="{{ url('admin/savessproduct') }}" enctype="multipart/form-data">
+                @csrf
+
+                <div class="form-group">
+                    <select class="form-control" name="subcategory_id" required>
+                        @foreach($subcategories as $subcategory)
+                            @if ($subcategory->id == $product->sub_category_id)
+                                <option value="{{$subcategory->id}}" selected>{{$subcategory->title}}</option>
+                            @else
+                                <option value="{{$subcategory->id}}" >{{$subcategory->title}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Product Name</label>
+                    <input type="text" class="form-control" name="name" value="{{ $product->name }}"  placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <textarea type="text" class="form-control" name="description" value=" {{ $product->description }} "  placeholder=""> </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Dimension</label>
+                    <input type="text" class="form-control" name="dimension" value="{{ $product->dimension }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Angle</label>
+                    <input type="text" class="form-control" name="angle" value="{{ $product->angle }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Puissance</label>
+                    <input type="text" class="form-control" name="puissance" value="{{ $product->puissance }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Flux lumineux</label>
+                    <input type="text" class="form-control" name="flumineux" value="{{ $product->flux_lumineux }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Alimentation</label>
+                    <input type="text" class="form-control" name="alimentation" value="{{ $product->alimentation }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">T Couleur</label>
+                    <input type="text" class="form-control" name="tcouleur" value="{{ $product->tcoulor }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Module</label>
+                    <input type="text" class="form-control" name="module" value="{{ $product->module }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Poids</label>
+                    <input type="text" class="form-control" name="poids" value="{{ $product->poids }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Lumens</label>
+                    <input type="text" class="form-control" name="lumens" value="{{ $product->lumens }}"  placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Battery</label>
+                    <input type="text" class="form-control" name="battery" value="{{ $product->battery }}"  placeholder="">
+                </div>
+
+                <br>
+
+                <div class="form-group">
+                    <label for="exampleInputFile">Fiche technique</label>
+                    <input type="file" id="exampleInputFile" name="fiche_technique" required>
+                    <br>
+                </div>
+
+                <br>
+
+                <label for="exampleFormControlInput1">Images (Maximum 3 images )</label>
+                <div class="input-group control-group increment" >
+                    <input type="file" name="filename[]" class="form-control" required>
+                    <div class="input-group-btn">
+                        <button class="btn btn-success" type="button"><i class="glyphicon glyphicon-plus"></i>Add</button>
+                    </div>
+                </div>
+
+
+
+                <div class="clone hide" style="display:none">
+                    <div class="control-group input-group addedclones" style="margin-top:10px">
+                        <input type="file" name="filename[]" class="form-control">
+                        <div class="input-group-btn">
+                            <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <br>
+
+                <button type="submit" class="btn btn-primary mb-2">Save</button>
+            </form>
+
+
+
+        </div>
+
+    </div>
+
+
+
+
+@endsection
+
+@section('script')
+
+
+
+
+    <script>
+        $(document).ready(function() {
+
+            $(".btn-success").click(function(){
+                //alert('ok');
+                console.log($('.addedclones').length);
+                if ( $('.addedclones').length < 3  ) {
+                    var html = $(".clone").html();
+                    $(".increment").after(html);
+                }
+
+            });
+
+            $("body").on("click",".btn-danger",function(){
+                $(this).parents(".control-group").remove();
+            });
+
+        });
+
+    </script>
+@endsection
+
+
+
+
+
+
+
+

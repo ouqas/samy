@@ -44,6 +44,11 @@ class AdminController extends Controller
         $category = Category::find($category_id);
         return  view('category.editcategory')->with('category' , $category);
     }
+    public function editProductView ($product_id) {
+        $product = Product::find($product_id);
+        $subcategories = SubCategory::orderBy('title')->get() ;
+        return  view('product.editproduct')->with('product' , $product)->withSubcategories ($subcategories);
+    }
 
     public function editsubCategoryView ($subcategory_id) {
         $subcategory = SubCategory::find($subcategory_id);//->with('category');

@@ -9,7 +9,7 @@ class Product extends Model
     protected $fillable = ['name','description','dimension','angle','puissance','flux_lumineux','alimentation',
         'tcoulor','module','poids','lumens' ,'battery','sub_category_id','technical_details','image1' ,'image2','image3'];
     protected $hidden = [
-        'id'
+      //  'id'
     ];
     public $timestamps = false;
 

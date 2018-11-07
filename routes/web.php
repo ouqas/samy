@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('main');
 });
 
 
@@ -43,6 +43,7 @@ Route::group(['prefix' => 'admin' ] , function() {
     Route::get('/addproduct' ,'AdminController@addProductView')->name('addproduct') ;
     Route::post('/saveproduct', 'AdminController@saveProduct');
     Route::get('/gettallproducts' , 'AdminController@getAllProducts');
+    Route::get('/editproduct/{product_id}', 'AdminController@editProductView');
 
 });
 
