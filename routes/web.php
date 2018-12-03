@@ -12,10 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('index');
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
 
+Route::get('/brochure', function () {
+    return view('brochure');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
 
 
 
