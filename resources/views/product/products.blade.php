@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Page Title')
+@section('title', 'Produits')
 @section('content')
 
     <div class="card mb-3">
@@ -106,7 +106,7 @@
                                 } ,
                             })
                                 .done(function( msg ) {
-                                    // console.log(msg+' respo');
+                                     console.log(msg+' respo');
                                     // $('#partner_table').ajax.reload();
                                     ctr_dt.ajax.reload();
                                     $.toast({

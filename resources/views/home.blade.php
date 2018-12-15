@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Page Title')
+@section('title', 'Home')
 @section('content')
 
 
@@ -16,7 +16,7 @@
                     </div>
                     <div class="flex-grow-1 bg-white p-4">
                         <p class="text-uppercase text-secondary mb-0"> Category</p>
-                        <h3 class="font-weight-bold mb-0">1,6</h3>
+                        <h3 class="font-weight-bold mb-0"> {{ $categories }}</h3>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="flex-grow-1 bg-white p-4">
                         <p class="text-uppercase text-secondary mb-0">  Sub category</p>
-                        <h3 class="font-weight-bold mb-0">374</h3>
+                        <h3 class="font-weight-bold mb-0">{{ $subcategories }}</h3>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="flex-grow-1 bg-white p-4">
                         <p class="text-uppercase text-secondary mb-0"> Products </p>
-                        <h3 class="font-weight-bold mb-0"> 33</h3>
+                        <h3 class="font-weight-bold mb-0"> {{ $productscount }}</h3>
                     </div>
                 </div>
             </div>
@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <div class="flex-grow-1 bg-white p-4">
-                        <p class="text-uppercase text-secondary mb-0"> nothing</p>
-                        <h3 class="font-weight-bold mb-0">73</h3>
+                        <p class="text-uppercase text-secondary mb-0"> Erreur</p>
+                        <h3 class="font-weight-bold mb-0">0</h3>
                     </div>
                 </div>
             </div>

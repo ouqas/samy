@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin' ] , function() {
     Route::post('/saveproduct', 'AdminController@saveProduct');
     Route::get('/gettallproducts' , 'AdminController@getAllProducts');
     Route::get('/editproduct/{product_id}', 'AdminController@editProductView');
+    Route::post('/deleteproduct' ,'AdminController@deleteProduct' ) ;
 
 });
 

@@ -31,7 +31,10 @@ class AdminController extends Controller
     }
 
     public function index () {
-        return  view('home');
+        $categoriescount = Category::all()->count();
+        $produitscount = Product::all()->count();
+        $subcategoriescount = SubCategory::all()->count();
+        return  view('home')->with('productscount' , $produitscount)->withSubcategories ($subcategoriescount)->withCategories ($categoriescount);
     }
 
     public function category() {
@@ -195,5 +198,11 @@ class AdminController extends Controller
        // return 'ok';
         return \Redirect::route('addproduct')->with('message', 'Product Added!');
 
+    }
+
+    public function deleteProduct (Request $request) {
+        $product = Product::destroy($request['product_id']);
+
+        return $product;
     }
 }
