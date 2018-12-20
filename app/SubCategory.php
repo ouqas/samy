@@ -22,4 +22,12 @@ class SubCategory extends Model
     {
         return $this->hasMany('App\Product' ,'sub_category_id');
     }
+
+    public function delete()
+    {
+
+        $this->products()->delete();
+
+        return parent::delete();
+    }
 }

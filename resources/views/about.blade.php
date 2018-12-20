@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6 col-sm-6 hidden-xs">
                     <ol class="breadcrumb">
-                        <li><a href="index-2.html">ACCUEIL</a></li>
+                        <li><a href="{{url('/')}}">ACCUEIL</a></li>
                         <li class="active">WERDELL</li>
                     </ol>
                 </div>

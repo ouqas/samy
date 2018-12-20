@@ -59,7 +59,7 @@
         <div class="lower-header">
             <div class="container for-navi">
                 <h1 class="logo">
-                    <a href="index-2.html"><img src="main/images/logo.png" alt="Site Logo"></a>
+                    <a href="{{url('/')}}"><img src="{{asset('main/images/logo.png')}}" alt="Site Logo"></a>
                 </h1>
                 <!-- Cart Module -->
                 <div class="globe-module hidden-xs hidden-sm">
@@ -100,13 +100,28 @@
                 </head>
                 <nav class="main-navigation">
                     <ul class="sf-menu">
-                        <li class="active"><a href="index-2.html">ACCUEIL</a>
+                        <li class="active"><a href="{{url('/')}}">ACCUEIL</a>
                         <li class="megamenu"><a href="#">PRODUITS</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
                                         <div class="row">
-                                            <div class="col-md-4"> <span class="megamenu-sub-title">&Eacute;CLAIRAGE INT&Eacute;RIEUR</span>
+                                            @foreach ($categories as $category)
+
+                                                <div class="col-md-4"> <span class="megamenu-sub-title">{{strtoupper($category->title)}}</span>
+
+
+                                                    <ul class="sub-menu">
+                                                        @foreach( $category->subcategories as $subcategory )
+                                                        <li><a href="{{url('/products')}}/{{$subcategory->id}}">{{strtoupper($subcategory->title)}}</a></li>
+                                                        @endforeach
+
+                                                    </ul>
+
+
+                                                </div>
+                                            @endforeach
+                                           <!-- <div class="col-md-4"> <span class="megamenu-sub-title">&Eacute;CLAIRAGE INT&Eacute;RIEUR</span>
                                                 <ul class="sub-menu">
                                                     <li><a href="downlights.html">Downlights</a></li>
                                                     <li><a href="panels.html">Panels</a></li>
@@ -137,7 +152,7 @@
                                                     <li><a href="projecteurs.html">PROJECTEURS</a></li>
                                                     <li><a href="armatures.html">ARMATURES ÉTANCHES / SUSPENSIONS</a></li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </li>
@@ -186,7 +201,7 @@
             <div class="row">
                 <div class="col-md-4 col-sm-4 format-standard">
                     <a href="downlights.html" class="featured-project-block media-box">
-                        <img src="main/images/interieur.jpg" alt="" class="featured-image">
+                        <img src="{{asset('main/images/interieur.jpg')}}" alt="" class="featured-image">
                         <span class="project-overlay">
                         	<span class="project-title">éclairage précis et direct</span>
                         	<span class="project-cat">intérieur</span>
@@ -195,7 +210,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 format-standard">
                     <a href="urbain.html" class="featured-project-block media-box">
-                        <img src="main/images/public.jpg" alt="" class="featured-image">
+                        <img src="{{asset('main/images/public.jpg')}}" alt="" class="featured-image">
                         <span class="project-overlay">
                         	<span class="project-title">Luminaires très appréciés</span>
                         	<span class="project-cat">urbain</span>
@@ -204,7 +219,7 @@
                 </div>
                 <div class="col-md-4 col-sm-4 format-standard">
                     <a href="muraux.html" class="featured-project-block media-box">
-                        <img src="main/images/exterieur.jpg" alt="" class="featured-image">
+                        <img src="{{asset('main/images/exterieur.jpg')}}" alt="" class="featured-image">
                         <span class="project-overlay">
                         	<span class="project-title">lumière adaptée aux besoins</span>
                         	<span class="project-cat">extérieur</span>
@@ -224,10 +239,10 @@
                 </div>
                 <div class="col-md-8 col-sm-8">
                     <ul class="footer-nav">
-                        <li><a href="index-2.html">ACCUEIL</a></li>
-                        <li><a href="projects.html">PROJETS</a></li>
-                        <li><a href="about.html">WERDELL</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="{{url('/')}}">ACCUEIL</a></li>
+                        <li><a href="{{url('/about')}}">PROJETS</a></li>
+                        <li><a href="{{url('/about')}}">WERDELL</a></li>
+                        <li><a href="{{url('/contact')}}">Contact</a></li>
                     </ul>
                 </div>
             </div>

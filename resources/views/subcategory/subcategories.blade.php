@@ -93,7 +93,7 @@
                 console.log(row_id+$('#_token').val());
                 $.confirm({
                     title: 'Attention!',
-                    content: 'Vous risquez de supprimer cet categorie ??',
+                    content: 'Vous risquez de supprimer cet categorie , et Tous les produits reliés ??',
                     buttons: {
                         confirm: function () {
                             $.ajax({

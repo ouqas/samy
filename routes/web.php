@@ -12,20 +12,43 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    $value = Cache::rememberForever('users' , function () {
+        return App\Category::with('SubCategories')->get();
+    });
+    return view('index')->with('categories' , $value);
 });
 
 Route::get('/about', function () {
-    return view('about');
+    $value = Cache::rememberForever('users' , function () {
+        return App\Category::with('SubCategories')->get();
+    });
+    return view('about')->with('categories' , $value);
 });
 
 Route::get('/brochure', function () {
-    return view('brochure');
+    $value = Cache::rememberForever('users' , function () {
+        return App\Category::with('SubCategories')->get();
+    });
+    return view('brochure')->with('categories' , $value);
 });
 
 Route::get('/contact', function () {
-    return view('contact');
+    $value = Cache::rememberForever('users' , function () {
+        return App\Category::with('SubCategories')->get();
+    });
+    return view('contact')->with('categories' , $value);
 });
+
+Route::get('/products/{subcategory_id}', 'SiteController@showproducts');
+
+
+Route::get('/product', function () {
+    $value = Cache::rememberForever('users' , function () {
+        return App\Category::with('SubCategories')->get();
+    });
+    return view('product')->with('categories' , $value);
+});
+
 
 
 
