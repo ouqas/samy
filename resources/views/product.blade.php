@@ -25,14 +25,15 @@
                         <div class="entry">
                             <div class="flexslider" data-pagination="yes" data-style="slide">
                                 <ul class="slides">
+
                                     <li>
-                                        <img src="{{asset('main/images/termuda-1.jpg')}}" alt="">
+                                        <img src="{{ asset("uploads/$product->image1")  }}" alt="">
                                     </li>
                                     <li>
-                                        <img src="{{asset('main/images/termuda-2.jpg')}}" alt="">
+                                        <img src="{{ asset("uploads/$product->image2")  }}" alt="">
                                     </li>
                                     <li>
-                                        <img src="{{asset('main/images/termuda-3.jpg')}}" alt="">
+                                        <img src="{{ asset("uploads/$product->image3")  }}" alt="">
                                     </li>
                                 </ul>
                             </div>
@@ -51,18 +52,67 @@
                                     <div class="event-excerpt">
                                         <table class="table table-striped">
                                             <tbody>
+                                            @if ($product->dimension != "")
                                             <tr>
-                                                <th>Puissance: </th>
-                                                <th> 30W / 40W / 60W</th>
+                                                <th>Dimension: </th>
+                                                <th> {{ $product->dimension }} </th>
                                             </tr>
-                                            <tr>
-                                                <td> flux lumineux: </td>
-                                                <td> 2950LM / 3900LM / 5800LM</td>
-                                            </tr>
-                                            <tr>
-                                                <td> Module: </td>
-                                                <td> 16LED</td>
-                                            </tr>
+                                            @endif
+                                            @if ($product->angle != "")
+                                                <tr>
+                                                    <td>Angle: </td>
+                                                    <td> {{ $product->angle }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->puissance != "")
+                                                <tr>
+                                                    <td>Puissance: </td>
+                                                    <td> {{ $product->puissance }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->flux_lumineux != "")
+                                                <tr>
+                                                    <td>Flux lumineux: </td>
+                                                    <td> {{ $product->flux_lumineux }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->alimentation != "")
+                                                <tr>
+                                                    <td>Alimentation: </td>
+                                                    <td> {{ $product->alimentation }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->tcoulor != "")
+                                                <tr>
+                                                    <td>T° de couleur: </td>
+                                                    <td> {{ $product->tcoulor }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->module != "")
+                                                <tr>
+                                                    <td>Module: </td>
+                                                    <td> {{ $product->module }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->poids != "")
+                                                <tr>
+                                                    <td>Poids: </td>
+                                                    <td> {{ $product->poids }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->lumens != "")
+                                                <tr>
+                                                    <td>Lumens: </td>
+                                                    <td> {{ $product->lumens }} </td>
+                                                </tr>
+                                            @endif
+                                            @if ($product->battery != "")
+                                                <tr>
+                                                    <td>Battery: </td>
+                                                    <td> {{ $product->battery }} </td>
+                                                </tr>
+                                            @endif
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -73,7 +123,7 @@
                         <div class="widget sidebar-widget custom_categories_widget">
                             <h3 class="title">Téléchargements</h3>
                             <ul>
-                                <li>&nbsp;<a href="acces.html">Fiche technique</a></li>
+                                <li>&nbsp;<a href="{{ asset("uploads/$product->technical_details")  }}" target="_blank" >Fiche technique</a></li>
                                 <li>&nbsp;<a href="acces.html">IES</a></li>
                             </ul>
                         </div>

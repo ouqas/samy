@@ -182,7 +182,7 @@ class AdminController extends Controller
         $product->poids = $request['poids'] ?  '' : $request['poids'];
         $product->lumens = $request['lumens'] ?  '' : $request['lumens'];
         $product->battery = $request['battery'] ?  '' : $request['battery'];
-        $product->technical_details = Storage::disk('local')->put('fiches', $request->file('fiche_technique')) ;
+        $product->technical_details = Storage::disk('public_uploads')->put('fiches', $request->file('fiche_technique')) ;
 
         if($request->hasfile('filename'))
         {
@@ -191,7 +191,7 @@ class AdminController extends Controller
             foreach($request->file('filename') as $image)
             {
                // $name=$image->getClientOriginalName();
-                $filepath = Storage::disk('local')->put('images', $image, 'public');
+                $filepath = Storage::disk('public_uploads')->put('images', $image, 'public');
                 //$image->move(local_path().'/images/', $name);
                 $product["image$i"] = $filepath ;
                 $i++;

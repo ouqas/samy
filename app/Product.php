@@ -13,6 +13,7 @@ class Product extends Model
     ];
     public $timestamps = false;
 
+
     public function SubCategory()
     {
         return $this->belongsTo('App\SubCategory' , 'sub_category_id');

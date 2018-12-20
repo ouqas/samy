@@ -33,7 +33,20 @@ class SiteController extends Controller
             $products = Product::where('sub_category_id', $subcetegory)->get();
             return view('products')->withcategories($value)->with('products' , $products);
         }
-        return 'haha';
+        return 'nigga no';
 
+    }
+
+    public function showproduct ($product_id) {
+        if ( is_numeric ($product_id) ){
+
+            $value = Cache::remember('users' ,'5', function () {
+                return App\Category::with('SubCategories')->get();
+            });
+
+            $product = Product::where('id', $product_id)->first();
+                return view('product')->withcategories($value)->with('product' , $product);
+        }
+        return 'no';
     }
 }

@@ -12,28 +12,28 @@
 */
 
 Route::get('/', function () {
-    $value = Cache::rememberForever('users' , function () {
+    $value = Cache::remember('users' ,'5' , function () {
         return App\Category::with('SubCategories')->get();
     });
     return view('index')->with('categories' , $value);
 });
 
 Route::get('/about', function () {
-    $value = Cache::rememberForever('users' , function () {
+    $value = Cache::remember('users' ,'5', function () {
         return App\Category::with('SubCategories')->get();
     });
     return view('about')->with('categories' , $value);
 });
 
 Route::get('/brochure', function () {
-    $value = Cache::rememberForever('users' , function () {
+    $value = Cache::remember('users' ,'5', function () {
         return App\Category::with('SubCategories')->get();
     });
     return view('brochure')->with('categories' , $value);
 });
 
 Route::get('/contact', function () {
-    $value = Cache::rememberForever('users' , function () {
+    $value = Cache::remember('users' ,'5', function () {
         return App\Category::with('SubCategories')->get();
     });
     return view('contact')->with('categories' , $value);
@@ -42,13 +42,13 @@ Route::get('/contact', function () {
 Route::get('/products/{subcategory_id}', 'SiteController@showproducts');
 
 
-Route::get('/product', function () {
-    $value = Cache::rememberForever('users' , function () {
-        return App\Category::with('SubCategories')->get();
-    });
-    return view('product')->with('categories' , $value);
-});
+Route::get('/product/{product_id}',  'SiteController@showproduct');
 
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 
 
 

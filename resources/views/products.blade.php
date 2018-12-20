@@ -22,11 +22,11 @@
                 <ul class="grid-holder col-3 events-grid">
                     @foreach( $products as $product )
                     <li class="grid-item format-standard">
-                        <div class="grid-item-inner"> <a href="{{url('product')}}/{{$product->id}}" class="media-box"><img src="{{ asset("storage/$product->image1")  }}" alt=""></a>
+                        <div class="grid-item-inner"> <a href="{{url('product')}}/{{$product->id}}" class="media-box"><img src="{{ asset("uploads/$product->image1")  }}" alt=""></a>
                             <ul class="info-cols clearfix">
                                 <li>{{$product->name}}</li>
                             </ul>
-                            {{ asset("storage/$product->image1")  }}
+
                         </div>
                     </li>
                     @endforeach
