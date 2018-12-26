@@ -171,17 +171,17 @@ class AdminController extends Controller
         $product = new Product() ;
         $product->name = $request['name'] ;
         $product->sub_category_id = $request['subcategory_id'] ;
-        $product->description = $request['description'] ?  '' : $request['description'];
-        $product->dimension = $request['dimension'] ?  '' : $request['dimension'];
-        $product->angle = $request['angle'] ?  '' : $request['angle'];
-        $product->puissance = $request['puissance'] ?  '' : $request['puissance'];
-        $product->flux_lumineux = $request['flumineux'] ?  '' : $request['flumineux'];
-        $product->alimentation = $request['alimentation'] ?  '' : $request['alimentation'];
-        $product->tcoulor = $request['tcouleur'] ?  '' : $request['tcouleur'];
-        $product->module = $request['module'] ?  '' : $request['module'];
-        $product->poids = $request['poids'] ?  '' : $request['poids'];
-        $product->lumens = $request['lumens'] ?  '' : $request['lumens'];
-        $product->battery = $request['battery'] ?  '' : $request['battery'];
+        $product->description = $request['description'] ?   $request['description'] : '';
+        $product->dimension = $request['dimension'] ?   $request['dimension']: '';
+        $product->angle = $request['angle'] ?   $request['angle'] : '';
+        $product->puissance = $request['puissance'] ?   $request['puissance']: '';
+        $product->flux_lumineux = $request['flumineux'] ?   $request['flumineux']: '';
+        $product->alimentation = $request['alimentation'] ?   $request['alimentation']: '';
+        $product->tcoulor = $request['tcouleur'] ?   $request['tcouleur']: '';
+        $product->module = $request['module'] ?   $request['module']: '';
+        $product->poids = $request['poids'] ?   $request['poids']: '';
+        $product->lumens = $request['lumens'] ?   $request['lumens']: '';
+        $product->battery = $request['battery'] ?   $request['battery']: '';
         $product->technical_details = Storage::disk('public_uploads')->put('fiches', $request->file('fiche_technique')) ;
 
         if($request->hasfile('filename'))
@@ -207,8 +207,11 @@ class AdminController extends Controller
     }
 
     public function deleteProduct (Request $request) {
-        $product = Product::destroy($request['product_id']);
+       // return '1';
 
-        return $product;
+        $product = Product::where('id', '=', $request['product_id'])->first();
+        return $product->delete().'ok';
+
+
     }
 }

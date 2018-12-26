@@ -19,6 +19,6 @@ class Product extends Model
         return $this->belongsTo('App\SubCategory' , 'sub_category_id');
     }
     public function delete () {
-        $this->delete();
+        return parent::delete();
     }
 }
