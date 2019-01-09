@@ -29,16 +29,20 @@
                                     <li>
                                         <img src="{{ asset("uploads/$product->image1")  }}" alt="">
                                     </li>
+                                    @if ($product->image2 != "")
                                     <li>
                                         <img src="{{ asset("uploads/$product->image2")  }}" alt="">
                                     </li>
+                                    @endif
+                                    @if ($product->image3 != "")
                                     <li>
                                         <img src="{{ asset("uploads/$product->image3")  }}" alt="">
                                     </li>
+                                    @endif
                                 </ul>
                             </div>
                             <div>
-                                <img src="{{asset('main/images/termuda-4.jpg')}}" alt="" >
+                           <!--     <img src="{{asset('main/images/termuda-4.jpg')}}" alt="" > -->
                             </div>
                         </div>
                     </div>
@@ -124,7 +128,7 @@
                             <h3 class="title">Téléchargements</h3>
                             <ul>
                                 <li>&nbsp;<a href="{{ asset("uploads/$product->technical_details")  }}" target="_blank" >Fiche technique</a></li>
-                                <li>&nbsp;<a href="acces.html">IES</a></li>
+                               <!-- <li>&nbsp;<a href="acces.html">IES</a></li>-->
                             </ul>
                         </div>
                     </div>
